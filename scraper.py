@@ -1,4 +1,4 @@
-from gml_scraper import scrape
+from dc_base_scrapers.xml_scraper import Wfs2Scraper
 
 
 stations_url = "http://arcgisweb.fife.gov.uk/geoserver/fife/wfs?service=WFS&version=1.3.0&request=GetFeature&typeNames=fife%3APOLLING_PLACES&srsName=EPSG%3A4326"
@@ -20,5 +20,7 @@ districts_fields = {
 council_id = 'S12000015'
 
 
-scrape(stations_url, council_id, 'stations', stations_fields, 'OBJECTID', xml_format='wfs/2.0')
-scrape(districts_url, council_id, 'districts', districts_fields, 'OBJECTID', xml_format='wfs/2.0')
+stations_scraper = Wfs2Scraper(stations_url, council_id, 'stations', stations_fields, 'OBJECTID')
+stations_scraper.scrape()
+districts_scraper = Wfs2Scraper(districts_url, council_id, 'districts', districts_fields, 'OBJECTID')
+districts_scraper.scrape()
